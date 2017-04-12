@@ -55,15 +55,13 @@ class PhysicsObject(object):
 			b.y -= shift[1]
 
 	# rotation is defined in a clockwise direction
-	def shiftRotation(self, rotation):
-		center = Point(*self.getCenter())
+	def shiftRotation(self, shift):
+		self.rotation += shift
+		c = Point(*self.getCenter())
 		for b in self.points:
-			v = Vector(center, b)
-			l = v.getMagnitude()
-			r = (v.getDirection() - rotation) % (2 * pi)
-			
-			b.x = center.x + l * cos(r)
-			b.y = center.y - l * sin(r)
+			(x, y) = (b.x - c.x, b.y - c.y)
+			b.x = (x * cos(shift)) - (y * sin(shift)) + c.x
+			b.y = (y * cos(shift)) + (x * sin(shift)) + c.y
 
 	# return the magnitude of the velocity for this shape
 	def getSpeed(self):

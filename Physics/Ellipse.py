@@ -42,8 +42,8 @@ class Ellipse(Physics.PhysicsObject):
 			x = (x1 * cos(self.rotation)) - (y1 * sin(self.rotation))
 			y = (y1 * cos(self.rotation)) + (x1 * sin(self.rotation))
 			
-			self.ellipseBox.append(round(x + cx))
-			self.ellipseBox.append(round(y + cy))
+			self.ellipseBox.append(int(x + cx))
+			self.ellipseBox.append(int(y + cy))
 
 	def draw(self, canvas):
 		if not self.drawn: self.drawn = canvas.create_polygon(self.ellipseBox, fill = Functions.makeHexColor(self.color), smooth = "true")
