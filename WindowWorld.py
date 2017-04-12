@@ -42,6 +42,10 @@ class WindowWorld(object):
 				points += [Point(x, y)]
 			return points
 
+		def getbboxEllipse(self, shift = Point(0, 0)):
+			return [Point(self.posx, self.posy) + shift, Point(self.posx + self.squarex, self.posy + self.squarey) + shift]
+
+
 	def __init__(self, master):
 		self.canvas = None
 		self.physics = None
@@ -79,7 +83,11 @@ class WindowWorld(object):
 		self.myStar.velocity = [0.1, 0.1]
 		self.myStar.angularv = 0.04
 
-		self.physics.addObjects(self.mySquare, self.myRect, self.myRect2, self.myRect3, self.myStar)
+		self.myEllipse = Ellipse(WindowWorld.Dims.getbboxEllipse())
+		self.myEllipse.velocity = [0.1, 0.1]
+		self.myEllipse.angularv = 0.04
+
+		self.physics.addObjects(self.mySquare, self.myRect, self.myRect2, self.myRect3, self.myStar, self.myEllipse)
 
 
 
